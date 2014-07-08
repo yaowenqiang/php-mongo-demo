@@ -19,3 +19,28 @@ div#contentarea{
 div#innercontentarea {padding:10px 50px}
 div#innercontentarea form input[type=text]{width:435px;}
 div#innercontentarea form textarea[name=content]{width:435px;}
+table.articles{
+    width:100%:
+    line-height: 1;
+    text-align: left;;
+}
+table.articles th{
+    border-bottom: 1px solid #ccc;
+    padding:8px 0;
+    font-weight: bold;
+}
+table.articles td{
+    border-bottom: 1px solid #eee;
+    padding:6px 0;
+}
+div#navigation {
+    margin: 10px 150px;
+    padding:5px 90px;
+    text-align: center;
+    height:30px;
+    line-height:38px;
+}
+div#navigation div.prev {display:block;float:left;width:40%;}
+div#navigation div.page-number {float:left;width:20%;}
+div#navigation div.next {float:right;width:40%;}
+.clear { clear:both;}

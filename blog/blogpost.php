@@ -12,14 +12,15 @@ case 'save_article':
         'saved_at'=>new MongoDate()
     );
     //$collection->insert($article);
+    /*try {*/
+        /*[>$status = $collection->insert(array(['title'=>'Blog Title','content'=>'Blog Content']),array('w'=>true));<]*/
+        /*$collection->insert($article);*/
+        /*echo "Insert operation complete";*/
+    /*} catch (MongoCursorException $e) {*/
+        /*die('insert failed '.$e->getMessage());*/
+    /*}*/
     try {
-        $status = $collection->insert(array(['title'=>'Blog Title','content'=>'Blog Content']),array('w'=>true));
-        echo "Insert operation complete";
-    } catch (MongoCursorException $e) {
-        die('insert failed '.$e->getMessage());
-    }
-    try {
-        $status = $collection->insert(array(['title'=>'Blog Title','content'=>'Blog Content']),array('w'=>true,'timeout'=>true));
+        $status = $collection->insert($article,array('w'=>true,'socketTimeoutMS'=>true));
         echo "Insert operation complete";
     } catch (MongoCursorTimeoutException $e) {
         die('insert failed '.$e->getMessage());
