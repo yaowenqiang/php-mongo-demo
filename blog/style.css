@@ -44,3 +44,15 @@ div#navigation div.prev {display:block;float:left;width:40%;}
 div#navigation div.page-number {float:left;width:20%;}
 div#navigation div.next {float:right;width:40%;}
 .clear { clear:both;}
+div#comment-section {
+    border-top:1px solid #ccc;
+}
+div#comment-section form input.comment-input {
+    width:200px;
+}
+div#comment-section form textarea[name=comment] {
+    width:255px;
+}
+span.input-label{
+    font-weight:bold;padding-right:10px;
+}

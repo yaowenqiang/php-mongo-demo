@@ -8,7 +8,7 @@ try {
 $currentPage = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
 $articlePerPage = 5; //number of articles to show per page
 $skip = ($currentPage - 1) * $articlePerPage;
-$cursor = $articleCollection->find(array('title'=>array('$exists'=>false)),$fields=array('title','saved_at'));
+$cursor = $articleCollection->find(array('title'=>array('$exists'=>true)),$fields=array('title','saved_at'));
 $totalArticles = $cursor->count();
 $totalPages = (int)ceil($totalArticles) / $articlePerPage;
 $cursor -> sort(array('created_at'=>-1))->skip($skip)->limit($articlePerPage);
