@@ -8,7 +8,7 @@ try {
 $currentPage = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;
 $articlePerPage = 5;
 $skip = ($currentPage -1)* $articlePerPage;
-$cursor = $articleCollection->find(array(),array('title','saved_at'));
+$cursor = $articleCollection->find(array('title'=>array('$exists'=>true)),array('title','saved_at'));
 $totalArticles = $cursor->count();
 $totalPages = (int)ceil($totalArticles / $articlePerPage);
 $cursor->sort(array('saved_at'=>-1))->skip($skip)->limit($articlePerPage);
@@ -44,6 +44,7 @@ $cursor->sort(array('saved_at'=>-1))->skip($skip)->limit($articlePerPage);
                             <td><?php print date('g:i a,F j',$article['saved_at']->sec);?></td>
                             <td class='url'>
                                 <a href='blog.php?id=<?php echo $article['_id'];?>'>View</a>
+                                 | <a href='edit.php?id=<?php echo $article['_id'];?>'>Edit</a>
                             </td>
                         </tr>
                         <?php endwhile;?>
