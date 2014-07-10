@@ -65,7 +65,7 @@ require_once('dbconnection.php');
         $query = array(
             'session_id'=>$sessionId,
             'timeout_at'=>array('$gte'=>time()),
-            'expire_at'=>array('gte'=>time() - SessionManager::SESSION_LIFESPAN)
+            'expired_at'=>array('gte'=>time() + SessionManager::SESSION_LIFESPAN)
         );
         $result = $this->_collection->findOne($query);
         if (!isset($result['data'])) {
@@ -78,13 +78,13 @@ require_once('dbconnection.php');
         $expire_at = time() + self::SESSION_TIMEOUT;
         $new_obj = array(
             'data'=>$data,
-            'timeout_at'=>time() + self::SESSION_TIMEOUT,
-            'expire_at'=>(empty($this->_currentSession))?
+            'timedout_at'=>time() + self::SESSION_TIMEOUT,
+            'expired_at'=>(empty($this->_currentSession))?
             time() + SessionManager::SESSION_LIFESPAN:
-            $this->_currentSession['expire_at']
+            $this->_currentSession['expired_at']
         );
         $query = array('session_id'=>$sessionId);
-        $this->_collection->update($query,array('$set'=>$new_obj,array('upsert'=>True)));
+        $this->_collection->update($query,array('$set'=>$new_obj),array('upsert'=>True));
         return true;
     }
     public function destroy($sessionId)
@@ -106,3 +106,4 @@ require_once('dbconnection.php');
  }
 //initiate the session
 $session = new SessionManager();
+

@@ -6,7 +6,7 @@
  class DBConnection
  {
 
-     const HOST     = 'localhost';
+     const HOST     = '127.0.0.1';
      const PORT     = 27017;
      const DBNAME   = 'myblogsite';
      private static $instance;
@@ -25,6 +25,7 @@
              $this->connection = new MongoClient($connectionString);
              $this->database = $this->connection->selectDB(DBConnection::DBNAME);
          } catch (MongoConnectionException  $e) {
+                die("Failed to connect to database ").$e->getMessage();
          }
      }
     /**
