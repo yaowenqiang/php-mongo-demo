@@ -39,7 +39,7 @@ require_once('dbconnection.php');
             array(&$this,'gc')
         );
         //Set session garbagge collection period
-        ini_set('session_gc_maxlifetime',SessionManager::SESSION_LIFESPAN);
+        ini_set('session.gc_maxlifetime',SessionManager::SESSION_LIFESPAN);
         //set session coolie configuration
         session_set_cookie_params(
             SessionManager::SESSION_LIFESPAN,
@@ -65,7 +65,8 @@ require_once('dbconnection.php');
         $query = array(
             'session_id'=>$sessionId,
             'timedout_at'=>array('$gte'=>time()),
-            'expired_at'=>array('$gte'=>time() - SessionManager::SESSION_LIFESPAN)
+            'expired_at'=>array('$gte'=>time())
+            /*'expired_at'=>array('$gte'=>time() - SessionManager::SESSION_LIFESPAN)*/
         );
         $result = $this->_collection->findOne($query);
         $this->_currentSession = $result;
@@ -90,12 +91,12 @@ require_once('dbconnection.php');
     }
     public function destroy($sessionId)
     {
-        $this->_collection->remove(array('_id'=>$sessionId));
+        $this->_collection->remove(array('session_id'=>$sessionId));
         return true;
     }
     public function gc()
     {
-        $query = array('expire_at'=>array('$lt'=>time()));
+        $query = array('expired_at'=>array('$lt'=>time()));
         $this->_collection->remove($query);
         return true;
     }

@@ -1,6 +1,5 @@
 <?php
-require('dbconnection.php');
-require('dbconnection.php');
+require_once('dbconnection.php');
 class User
 {
     const COLLECTION = 'users';
@@ -15,7 +14,7 @@ class User
      */
     public function __construct()
     {
-        $this->_mongo = DBConnection::instantiate;
+        $this->_mongo = DBConnection::instantiate();
         $this->_collection = $this->_mongo->getCollection(User::COLLECTION);
         if ($this->isLoggedIn()) {
             $this->_loadData();
@@ -42,13 +41,13 @@ class User
     {
         $query = array(
             'username'=>$username,
-            'password'=>$password
+            'password'=>md5($password)
         );
-        $this->_user->_collection->findOne($query);
+        $this->_user = $this->_collection->findOne($query);
         if (empty($this->_user)) {
             return false;
         }
-        $_SESSION['user_id'] = (string) $this->_user['id'];
+        $_SESSION['user_id'] = (string) $this->_user['_id'];
         return true;
     }
     /**
@@ -67,7 +66,7 @@ class User
      * @return void
      * @author yaowenqiang
      */
-    public function _get($attr)
+    public function __get($attr)
     {
         if (empty($this->_user)) {
             return null;
