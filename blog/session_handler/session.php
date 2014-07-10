@@ -64,10 +64,11 @@ require_once('dbconnection.php');
     {
         $query = array(
             'session_id'=>$sessionId,
-            'timeout_at'=>array('$gte'=>time()),
-            'expired_at'=>array('gte'=>time() + SessionManager::SESSION_LIFESPAN)
+            'timedout_at'=>array('$gte'=>time()),
+            'expired_at'=>array('$gte'=>time() - SessionManager::SESSION_LIFESPAN)
         );
         $result = $this->_collection->findOne($query);
+        $this->_currentSession = $result;
         if (!isset($result['data'])) {
             return '';
         }
