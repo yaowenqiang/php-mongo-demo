@@ -60,4 +60,5 @@ $article = $collection->findOne(array('_id'=>new MongoId($id)));
     $data = array('response_time_ms'=>($end - $start)*1000);
     $logger = new Logger();
     $logger->logRequest($data);
+    $logger->updateVisitCounter($id);
 ?>

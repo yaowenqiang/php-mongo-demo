@@ -56,4 +56,13 @@ define('LOGNAME','access_log');
         $this->_collection->insert($request);
 
     }
+    public function updateVisitCounter($articleId){
+        $articleVisitCounterDaily = $this->_dbconnection->getCollection('article_visit_counter_daily');
+        $criteria = array(
+            'article_id'=> new MongoId($articleId),
+            'request_date'=> new MongoDate(strtotime('today'))
+        );
+        $newobj = array('$inc'=>array('count'=>1));
+        $articleVisitCounterDaily->update($criteria,$newobj,array('upsert'=>True));
+    }
  }
