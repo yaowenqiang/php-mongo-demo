@@ -17,7 +17,7 @@ div#contentarea{
     border:1px #565b47;
 }
 div#innercontentarea {padding:10px 50px}
-div#innercontentarea form input[type=text]{width:435px;}
+/*div#innercontentarea form input[type=text]{width:435px;}*/
 div#innercontentarea form textarea[name=content]{width:435px;}
 table.articles{
     width:100%:

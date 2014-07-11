@@ -2,7 +2,7 @@
 require 'mysql.php';
 require 'dbconnection.php';
 //Query MySQL database to ge daily sales data
-$query = 'SELECT name,DATE(time_of_sales) as date_of_sales,SUM(units_sold) as total_units_sold FROM sales S INNER JOIN products p ON (p.id = s.product_id) GROUP BY product_id,DATE(time_of_sales))';
+$query = 'SELECT name,DATE(time_of_sales) as date_of_sales,SUM(units_sold) as total_units_sold FROM sales s INNER JOIN products p ON (p.id = s.product_id) GROUP BY product_id,DATE(time_of_sales)';
 $mysql = getMySQLConnection();
 $result = $mysql->query($query);
 if($result === False) {
