@@ -1,4 +1,6 @@
 <?php
+require('session_handler/log.php');
+$start = microtime();
 $id = $_GET['id'];
 try {
     $connection = new MongoClient();
@@ -53,4 +55,9 @@ $article = $collection->findOne(array('_id'=>new MongoId($id)));
         </div>
     </body>
 </html>
-
+<?php
+    $end = microtime();
+    $data = array('response_time_ms'=>($end - $start)*1000);
+    $logger = new Logger();
+    $logger->logRequest($data);
+?>
