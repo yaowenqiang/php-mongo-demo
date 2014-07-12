@@ -20,7 +20,7 @@ printf("\tDone\n");
 printf("Loading metadata ...\n");
 print_r($customer->getMetaData());
 printf("Updating metadata ...\n");
-$metaData = array(
+$metadata = array(
     "Marriage Anniversary"=>new MongoDate(strtotime('10 September 2005')),
     'Number of Kids'=>3,
     'Favorite TV Shows'=>array(
