@@ -9,7 +9,7 @@
      const HOST     = '127.0.0.1';
      const PORT     = 27017;
      /*const DBNAME   = 'myblogsite';*/
-     const DBNAME   = 'acmeproducts_mongo';
+     const DBNAME   = 'files';
      private static $instance;
      public $connection;
      public $database;
