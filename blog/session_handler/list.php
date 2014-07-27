@@ -27,7 +27,7 @@ $objects = $gridFS->find();
                     <?php while($object = $objects->getNext()): ?>
                     <tr>
                     <td><?php echo $object->file['caption'];?></td>
-                    <td><a href='image.php?id=<?php echo $object->file['_id']?>'><?php echo $object->file['filename'];?></a></td>
+                    <td><a href='stream.php?id=<?php echo $object->file['_id']?>'><?php echo $object->file['filename'];?></a></td>
                     <td><?php echo ceil($object->file['length']/1024).' KB';?></td>
                     </tr>
                     <?php endwhile;?>
